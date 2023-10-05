@@ -1,12 +1,7 @@
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-use log::Level;
 use wasm_bindgen::{prelude::wasm_bindgen, JsValue};
-
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
 
 #[wasm_bindgen(start)]
 fn run() -> Result<(), JsValue> {
@@ -26,15 +21,4 @@ fn run() -> Result<(), JsValue> {
     body.append_child(&val)?;
 
     Ok(())
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
 }
