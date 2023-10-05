@@ -29,7 +29,7 @@ features = [
 
 # https://rustwasm.github.io/wasm-pack/book/cargo-toml-configuration.html
 [package.metadata.wasm-pack.profile.profiling]
-wasm-opt = [ "-Oz", "--dce" ] # "-g"
+wasm-opt = [ "-Oz", "--dce", "-g" ] # "-g"
 
 [profile.release]
 lto = true
