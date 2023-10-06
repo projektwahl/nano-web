@@ -2,6 +2,11 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.ts'
+import wasmUrl from '../../target/wasm32-unknown-unknown/release/nano_web.wasm?url'
+
+WebAssembly.instantiateStreaming(fetch(wasmUrl)).then((obj) => {
+  console.log(obj.instance.exports.add(1, 2)); // "3"
+});
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
