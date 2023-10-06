@@ -3,11 +3,11 @@
 
 // https://github.com/rust-lang/rust/issues/60825
 
-//#[no_mangle]
-//pub static mut GLOBALL: usize = 1;
+#[no_mangle]
+pub static mut GLOBALL: usize = 1;
 
 extern "C" {
-    pub static mut GLOBALL: usize;
+    //pub static mut GLOBALL: usize;
 
     pub fn console_log(input: usize);
 }

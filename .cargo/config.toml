@@ -1,6 +1,6 @@
 [build]
 rustflags = [
-    "-C", "target-feature=+atomics,+bulk-memory,+exception-handling,+multivalue,+mutable-globals,+nontrapping-fptoint,+reference-types,+sign-ext,+simd128,+crt-static",
+#    "-C", "target-feature=+atomics,+bulk-memory,+exception-handling,+multivalue,+mutable-globals,+nontrapping-fptoint,+reference-types,+sign-ext,+simd128,+crt-static",
 ]
 
 [unstable]
