@@ -9,6 +9,10 @@ wasm-pack build --profiling . -- -Z build-std=core,std,panic_abort -Z build-std-
 
 # bundler, nodejs, web, no-modules
 
+cargo expand --target wasm32-unknown-unknown
+
+# https://github.com/rustwasm/wasm-bindgen/blob/main/crates/web-sys/src/lib.rs
+
 # https://github.com/rustwasm/wasm-bindgen/blob/main/src/convert/closures.rs
 
 # the wat format is pretty good
