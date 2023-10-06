@@ -4,14 +4,18 @@ import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.ts'
 import wasmUrl from '../../target/wasm32-unknown-unknown/release/nano_web.wasm?url'
 
+const global = new WebAssembly.Global({ value: "i32", mutable: true }, 1337);
+
 WebAssembly.instantiateStreaming(fetch(wasmUrl), {
   env: {
     console_log(arg) {
       console.log(arg)
-    }
-  }
+    },
+    GLOBALL: global
+  },
 }).then((obj) => {
   console.log(obj.instance.exports.add(1, 2)); // "3"
+  console.log(obj.instance.exports.get_global_value())
 });
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
