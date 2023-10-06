@@ -27,6 +27,8 @@ extern "C" {
     //pub static mut GLOBALL: usize;
 
     pub fn console_log(input: usize);
+
+    pub fn peekaboo(f: extern "C" fn(u32) -> u32);
 }
 
 #[no_mangle]
@@ -43,6 +45,15 @@ pub extern "C" fn add(left: usize, right: usize) -> usize {
         GLOBALL += 1;
     }
     left + right
+}
+
+pub extern "C" fn identity<T>(value: T) -> T {
+    value
+}
+
+#[no_mangle]
+pub extern "C" fn test() {
+    unsafe { peekaboo(identity) }
 }
 
 #[no_mangle]
