@@ -25,6 +25,12 @@ let exports = (await WebAssembly.instantiate(module, {
       let element = document.querySelector(string);
       let index = exports.externrefs.grow(1, element)
       return index
+    },
+    set_text_content(elementOffset: number, offset: number, length: number) {
+      const bytes = new Uint8Array(exports.memory.buffer, offset, length);
+      const string = new TextDecoder("utf8").decode(bytes);
+      let element = exports.externrefs.get(elementOffset) as Element;
+      element.textContent = string
     }
   },
 })).exports as {
