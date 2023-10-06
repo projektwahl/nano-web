@@ -10,7 +10,7 @@ fn panic(_panic: &core::panic::PanicInfo<'_>) -> ! {
 // https://github.com/rust-lang/rust/issues/60825
 
 #[no_mangle]
-pub static mut GLOBALL: usize = 1;
+pub static mut GLOBALL: isize = 1;
 
 //#[link(wasm_import_module = "Math")]
 //#[export_name = "add"]
@@ -26,18 +26,18 @@ const _: () = {
 extern "C" {
     //pub static GLOBAL2: usize;
 
-    pub fn console_log(input: usize);
+    pub fn console_log(input: isize);
 
     pub fn peekaboo(f: extern "C" fn(isize) -> isize);
 }
 
 #[no_mangle]
-pub extern "C" fn get_global_value() -> usize {
+pub extern "C" fn get_global_value() -> isize {
    unsafe { GLOBALL }
 }
 
 #[no_mangle]
-pub extern "C" fn add(left: usize, right: usize) -> usize {
+pub extern "C" fn add(left: isize, right: isize) -> isize {
     unsafe {
         console_log(left);
         console_log(right);
@@ -57,11 +57,11 @@ pub extern "C" fn test() {
 }
 
 #[no_mangle]
-pub extern "C" fn get_global_value_fun() -> extern "C" fn() -> usize {
+pub extern "C" fn get_global_value_fun() -> extern "C" fn() -> isize {
     get_global_value
 }
 
 #[no_mangle]
-pub extern "C" fn peekaboo2(f: extern "C" fn(u32) -> u32) -> u32 {
+pub extern "C" fn peekaboo2(f: extern "C" fn(isize) -> isize) -> isize {
     f(1)
 }

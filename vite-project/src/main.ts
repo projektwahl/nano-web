@@ -21,3 +21,5 @@ let instance = await WebAssembly.instantiate(module, {
 })
 
 console.log((instance.exports as any).test())
+let global = instance.exports.GLOBALL as WebAssembly.Global
+console.log(global.value)
