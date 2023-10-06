@@ -12,7 +12,7 @@ let exports = (await WebAssembly.instantiate(module, {
       let result = f(1)
       console.log("result", result)
     },
-    consoleLogString(offset: number, length: number) {
+    console_log_string(offset: number, length: number) {
       const bytes = new Uint8Array(exports.memory.buffer, offset, length);
       const string = new TextDecoder("utf8").decode(bytes);
       console.log(string);

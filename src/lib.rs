@@ -28,6 +28,8 @@ extern "C" {
 
     pub fn console_log(input: isize);
 
+    pub fn console_log_string(ptr: *const u8, length: usize);
+
     pub fn peekaboo(f: extern "C" fn(isize) -> isize);
 }
 
@@ -53,6 +55,7 @@ pub extern "C" fn negate<T: core::ops::Neg<Output = T>>(value: T) -> T {
 
 #[no_mangle]
 pub extern "C" fn test() {
+    unsafe { console_log_string("hello".as_ptr(), 5) };
     unsafe { peekaboo(negate) }
 }
 
