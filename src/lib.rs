@@ -1,9 +1,11 @@
-#![no_std]
+//#![no_std]
 
-#[panic_handler]
+use externref::Resource;
+use externref::externref;
+/*#[panic_handler]
 fn panic(_panic: &core::panic::PanicInfo<'_>) -> ! {
     core::arch::wasm32::unreachable()
-}
+}*/
 // https://github.com/rust-lang/rust/issues/103516
 // https://rustwasm.github.io/wasm-bindgen/reference/reference-types.html
 
@@ -23,6 +25,8 @@ const _: () = {
 };
 */
 
+#[externref]
+#[link(wasm_import_module = "env")]
 extern "C" {
     //pub static GLOBAL2: usize;
 
@@ -32,7 +36,7 @@ extern "C" {
 
     pub fn peekaboo(f: extern "C" fn(isize) -> isize);
 
-    pub fn query_selector(ptr: *const u8, length: usize);
+    pub fn query_selector(ptr: *const u8, length: usize) -> Resource<()>;
 }
 
 #[no_mangle]
