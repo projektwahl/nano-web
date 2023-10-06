@@ -24,7 +24,7 @@ const _: () = {
 */
 
 extern "C" {
-    //pub static mut GLOBALL: usize;
+    //pub static GLOBAL2: usize;
 
     pub fn console_log(input: usize);
 
@@ -42,6 +42,7 @@ pub extern "C" fn add(left: usize, right: usize) -> usize {
         console_log(left);
         console_log(right);
         console_log(GLOBALL);
+        console_log(GLOBAL2);
         GLOBALL += 1;
     }
     left + right
