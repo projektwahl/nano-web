@@ -6,6 +6,12 @@ let instance = await WebAssembly.instantiate(module, {
     console_log(arg: number) {
       console.log(arg)
     },
+    peekaboo(arg: number) {
+      let table = instance.exports.__indirect_function_table as WebAssembly.Table
+      let f = table.get(arg)
+      let result = f(1)
+      console.log("result", result)
+    },
     consoleLogString(offset: number, length: number) {
       const bytes = new Uint8Array(instance.exports.memory as unknown as ArrayBufferLike, offset, length);
       const string = new TextDecoder("utf8").decode(bytes);
@@ -14,5 +20,4 @@ let instance = await WebAssembly.instantiate(module, {
   },
 })
 
-console.log((instance.exports as any).add(1, 2));
-console.log((instance.exports as any).get_global_value())
+console.log((instance.exports as any).test())

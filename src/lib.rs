@@ -28,7 +28,7 @@ extern "C" {
 
     pub fn console_log(input: usize);
 
-    pub fn peekaboo(f: extern "C" fn(u32) -> u32);
+    pub fn peekaboo(f: extern "C" fn(isize) -> isize);
 }
 
 #[no_mangle]
@@ -47,13 +47,13 @@ pub extern "C" fn add(left: usize, right: usize) -> usize {
     left + right
 }
 
-pub extern "C" fn identity<T>(value: T) -> T {
-    value
+pub extern "C" fn negate<T: core::ops::Neg<Output = T>>(value: T) -> T {
+    -value
 }
 
 #[no_mangle]
 pub extern "C" fn test() {
-    unsafe { peekaboo(identity) }
+    unsafe { peekaboo(negate) }
 }
 
 #[no_mangle]
