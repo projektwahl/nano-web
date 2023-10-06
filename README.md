@@ -5,7 +5,11 @@ wasm_bindgen_convert_closures_invoke3_mut_h6effd6ec78924e06
 find out why it allocates and fix that
 
 ```bash
-wasm-pack build --profiling . -- -Z build-std=core,std,panic_abort -Z build-std-features=panic_immediate_abort && ls -l pkg/ && ls -lh pkg/ && wasm2wat pkg/nano_web_bg.wasm -o pkg/nano_web_bg.wat 
+cargo rustc --release --target wasm32-unknown-unknown -Z build-std=core,std,panic_abort -Z build-std-features=panic_immediate_abort -- --emit llvm-ir
+find target -type f -name '*.ll'
+# target/wasm32-unknown-unknown/release/deps/nano_web.ll
+
+wasm-pack build --release . -- -Z build-std=core,std,panic_abort -Z build-std-features=panic_immediate_abort && ls -l pkg/ && ls -lh pkg/ && wasm2wat pkg/nano_web_bg.wasm -o pkg/nano_web_bg.wat 
 
 # bundler, nodejs, web, no-modules
 
