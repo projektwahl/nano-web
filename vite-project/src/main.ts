@@ -1,5 +1,7 @@
 import wasmUrl from '../../target/wasm32-unknown-unknown/release/nano_web.wasm?url'
 
+// https://rustwasm.github.io/docs/wasm-bindgen/reference/reference-types.html
+
 let module = await WebAssembly.compileStreaming(fetch(wasmUrl))
 let exports = (await WebAssembly.instantiate(module, {
   env: {
@@ -17,6 +19,13 @@ let exports = (await WebAssembly.instantiate(module, {
       const string = new TextDecoder("utf8").decode(bytes);
       console.log(string);
     },
+    query_selector(offset: number, length: number): number {
+      const bytes = new Uint8Array(exports.memory.buffer, offset, length);
+      const string = new TextDecoder("utf8").decode(bytes);
+      let element = document.querySelector(string);
+      let index = exports.__indirect_function_table.grow(1, element)
+      return index
+    }
   },
 })).exports as {
   memory: WebAssembly.Memory,

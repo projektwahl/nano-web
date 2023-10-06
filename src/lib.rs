@@ -31,6 +31,8 @@ extern "C" {
     pub fn console_log_string(ptr: *const u8, length: usize);
 
     pub fn peekaboo(f: extern "C" fn(isize) -> isize);
+
+    pub fn query_selector(ptr: *const u8, length: usize);
 }
 
 #[no_mangle]
@@ -56,6 +58,7 @@ pub extern "C" fn negate<T: core::ops::Neg<Output = T>>(value: T) -> T {
 #[no_mangle]
 pub extern "C" fn test() {
     unsafe { console_log_string("hello".as_ptr(), 5) };
+    unsafe { query_selector("#counter".as_ptr(), 8) };
     unsafe { peekaboo(negate) }
 }
 
