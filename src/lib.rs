@@ -10,7 +10,7 @@ fn panic(_panic: &core::panic::PanicInfo<'_>) -> ! {
 // https://github.com/rust-lang/rust/issues/60825
 
 #[no_mangle]
-pub static mut GLOBALL: isize = 1;
+pub static mut GLOBALL: isize = 0;
 
 //#[link(wasm_import_module = "Math")]
 //#[export_name = "add"]

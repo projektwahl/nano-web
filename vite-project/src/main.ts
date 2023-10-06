@@ -20,6 +20,11 @@ let instance = await WebAssembly.instantiate(module, {
   },
 })
 
-console.log((instance.exports as any).test())
+let memory = instance.exports.memory as WebAssembly.Memory
+(instance.exports as any).test();
 let global = instance.exports.GLOBALL as WebAssembly.Global
-console.log(global.value)
+console.log("memory offset", global.value)
+let global_mem = new Uint32Array(memory.buffer, global.value);
+console.log("value: ", global_mem.at(0));
+(instance.exports as any).add(1, 1)
+console.log("value: ", global_mem.at(0));
