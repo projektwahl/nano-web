@@ -60,3 +60,8 @@ pub extern "C" fn test() {
 pub extern "C" fn get_global_value_fun() -> extern "C" fn() -> usize {
     get_global_value
 }
+
+#[no_mangle]
+pub extern "C" fn peekaboo2(f: extern "C" fn(u32) -> u32) -> u32 {
+    f(1)
+}
