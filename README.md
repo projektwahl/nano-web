@@ -9,7 +9,13 @@ cargo rustc --release --target wasm32-unknown-unknown -Z build-std=core,std,pani
 find target -type f -name '*.ll'
 # target/wasm32-unknown-unknown/release/deps/nano_web.ll
 
-wasm-pack build --release . -- -Z build-std=core,std,panic_abort -Z build-std-features=panic_immediate_abort && ls -l pkg/ && ls -lh pkg/ && wasm2wat pkg/nano_web_bg.wasm -o pkg/nano_web_bg.wat 
+cargo clean
+RUSTFLAGS="--emit=llvm-ir" wasm-pack build --release . -- -Z build-std=core,std,panic_abort -Z build-std-features=panic_immediate_abort && ls -l pkg/ && ls -lh pkg/ && wasm2wat pkg/nano_web_bg.wasm -o pkg/nano_web_bg.wat 
+rm panic_unwind-42d0f035091cc3cc.ll
+llvm-link target/wasm32-unknown-unknown/release/deps/*.ll
+llvm-link --only-needed *.ll > out.bc
+opt -O3 out.bc -o optimized.bc
+llvm-dis optimized.bc
 
 # bundler, nodejs, web, no-modules
 
