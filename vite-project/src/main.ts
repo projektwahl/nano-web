@@ -18,7 +18,6 @@ let instance = await WebAssembly.instantiate(module, {
   },
 })
 
-
 console.log(instance.exports.add(1, 2)); // "3"
 console.log(instance.exports.get_global_value())
 

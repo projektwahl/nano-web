@@ -1,3 +1,9 @@
+#![no_std]
+
+#[panic_handler]
+fn panic(_panic: &core::panic::PanicInfo<'_>) -> ! {
+    core::arch::wasm32::unreachable()
+}
 // https://github.com/rust-lang/rust/issues/103516
 // https://rustwasm.github.io/wasm-bindgen/reference/reference-types.html
 
@@ -5,6 +11,17 @@
 
 #[no_mangle]
 pub static mut GLOBALL: usize = 1;
+
+//#[link(wasm_import_module = "Math")]
+//#[export_name = "add"]
+//#[link_name = "..."]
+
+/*
+const _: () = {
+    #[link_section = "surmsection"]
+    static SECTION_CONTENT: [u8; 11] = *b"hello world";
+};
+*/
 
 extern "C" {
     //pub static mut GLOBALL: usize;
@@ -26,4 +43,9 @@ pub extern "C" fn add(left: usize, right: usize) -> usize {
         GLOBALL += 1;
     }
     left + right
+}
+
+#[no_mangle]
+pub extern "C" fn get_global_value_fun() -> extern "C" fn() -> usize {
+    get_global_value
 }
