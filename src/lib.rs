@@ -42,7 +42,6 @@ pub extern "C" fn add(left: usize, right: usize) -> usize {
         console_log(left);
         console_log(right);
         console_log(GLOBALL);
-        console_log(GLOBAL2);
         GLOBALL += 1;
     }
     left + right

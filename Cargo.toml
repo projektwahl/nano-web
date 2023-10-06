@@ -12,5 +12,6 @@ crate-type = ["cdylib"]
 
 
 [profile.release]
-debug = true
+#debug = true
 lto = true
+opt-level = "z"
