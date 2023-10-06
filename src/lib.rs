@@ -13,8 +13,8 @@ use wasm_bindgen::JsCast;
 extern "C" {
     type Global;
 
-    #[wasm_bindgen(getter, catch, static_method_of = Global, js_class = window, js_name = window)]
-    fn get_window() -> Result<Object, JsValue>;
+    #[wasm_bindgen(getter, static_method_of = Global, js_class = window, js_name = window)]
+    fn get_window() -> Window;
 }
 
 #[wasm_bindgen(start)]
