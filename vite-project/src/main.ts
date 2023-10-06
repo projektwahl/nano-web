@@ -23,13 +23,14 @@ let exports = (await WebAssembly.instantiate(module, {
       const bytes = new Uint8Array(exports.memory.buffer, offset, length);
       const string = new TextDecoder("utf8").decode(bytes);
       let element = document.querySelector(string);
-      let index = exports.__indirect_function_table.grow(1, element)
+      let index = exports.externrefs.grow(1, element)
       return index
     }
   },
 })).exports as {
   memory: WebAssembly.Memory,
   __indirect_function_table: WebAssembly.Table,
+  externrefs: WebAssembly.Table,
   GLOBALL: WebAssembly.Global,
   test: () => void,
   add: (a: number, b: number) => number,
