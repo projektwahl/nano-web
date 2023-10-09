@@ -1,6 +1,13 @@
-// for now leave this out as with no allocator needed this still generates code
-//#[global_allocator]
-//static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+extern crate alloc;
+
+#[cfg(target_arch = "wasm32")]
+use lol_alloc::{AssumeSingleThreaded, FreeListAllocator};
+
+// SAFETY: This application is single threaded, so using AssumeSingleThreaded is allowed.
+#[cfg(target_arch = "wasm32")]
+#[global_allocator]
+static ALLOCATOR: AssumeSingleThreaded<FreeListAllocator> =
+    unsafe { AssumeSingleThreaded::new(FreeListAllocator::new()) };
 
 use wasm_bindgen::prelude::wasm_bindgen;
 use web_sys::Window;

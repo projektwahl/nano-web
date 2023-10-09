@@ -3,23 +3,22 @@ name = "nano-web"
 version = "0.1.0"
 edition = "2021"
 
-[lib]
-crate-type = ["cdylib", "rlib"]
-
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 #console_error_panic_hook = { default-features = false, version = "0.1.7" }
 #console_log = { default-features = false, version = "1.0.0" }
-js-sys = { default-features = false, path = "../wasm-bindgen/crates/js-sys" }
+js-sys = { default-features = false, version = "0.3.64" } # path = "../wasm-bindgen/crates/js-sys" }
+lol_alloc = "0.4.0"
 #log = { default-features = false, version = "0.4.20" }
-wasm-bindgen = { default-features = false, path = "../wasm-bindgen" }
+wasm-bindgen = { default-features = false, version = "0.2.87" } # path = "../wasm-bindgen" }
 #wasm-bindgen-futures = { default-features = false, version = "0.4.37" }
-#wee_alloc = { default-features = false, version = "0.4.5" }
+
 
 [dependencies.web-sys]
 default-features = false
-path = "../wasm-bindgen/crates/web-sys"
+version = "0.3.64"
+#path = "../wasm-bindgen/crates/web-sys"
 features = [
   'Window',
 ]
