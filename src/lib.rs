@@ -23,7 +23,8 @@ extern "C" {
     #[wasm_bindgen(getter, static_method_of = Global, js_class = window, js_name = window)]
     fn get_window() -> Window;
 }
-/*
+
+
 #[wasm_bindgen(start)]
 fn run() {
     //std::panic::set_hook(Box::new(console_error_panic_hook::hook));
@@ -33,18 +34,13 @@ fn run() {
     // window object.
 
     // the comment in the source code even says this is large
-    //let window = Global::get_window().unwrap().dyn_into::<Window>().ok();
+    let window = Global::get_window();
     //let window = web_sys::window().unwrap();
-    //let document = window.document().expect("should have a document on window");
-    //let body = document.body().expect("document should have a body");
+    let document = window.document().unwrap();
+    let body = document.body().unwrap();
 
-    // Manufacture the element we're gonna append
-    //let val = document.create_element("p")?;
-    //val.set_text_content(Some("Hello from Rust!"));
+    let val = document.create_element("p").unwrap();
+    val.set_text_content(Some("Hello from Rust!"));
 
-    //body.append_child(&val)?;
-
-    
+    body.append_child(&val).unwrap();
 }
-
-*/
