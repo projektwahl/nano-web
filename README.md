@@ -5,7 +5,7 @@ wasm_bindgen_convert_closures_invoke3_mut_h6effd6ec78924e06
 find out why it allocates and fix that
 
 ```bash
-wasm-pack build --release . -- -Z build-std-features=panic_immediate_abort && wasm2wat pkg/nano_web_bg.wasm -o pkg/nano_web_bg.wat
+wasm-pack build --profiling . -- -Z build-std-features=panic_immediate_abort && wasm2wat pkg/nano_web_bg.wasm -o pkg/nano_web_bg.wat
 
 cargo install --path ../wasm-bindgen/crates/cli
 

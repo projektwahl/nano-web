@@ -8,20 +8,23 @@ crate-type = ["cdylib"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-#console_error_panic_hook = { default-features = false, version = "0.1.7" }
-#console_log = { default-features = false, version = "1.0.0" }
-js-sys = { default-features = false, version = "0.3.64" } # path = "../wasm-bindgen/crates/js-sys" }
-lol_alloc = "0.4.0"
-#log = { default-features = false, version = "0.4.20" }
-wasm-bindgen = { default-features = false, version = "0.2.87" } # path = "../wasm-bindgen" }
-#wasm-bindgen-futures = { default-features = false, version = "0.4.37" }
+[dependencies.lol_alloc]
+version = "0.4.0"
 
+[dependencies.js-sys]
+default-features = false
+#version = "0.3.64"
+path = "../wasm-bindgen/crates/js-sys"
+
+[dependencies.wasm-bindgen]
+default-features = false
+#version = "0.2.87"
+path = "../wasm-bindgen"
 
 [dependencies.web-sys]
 default-features = false
-version = "0.3.64"
-#path = "../wasm-bindgen/crates/web-sys"
+#version = "0.3.64"
+path = "../wasm-bindgen/crates/web-sys"
 features = [
   'Window',
 ]
@@ -34,3 +37,4 @@ wasm-opt = [ "-Oz", "--dce", "-g" ] # "-g"
 lto = true
 opt-level = 'z'
 panic = 'abort'
+debug = true
