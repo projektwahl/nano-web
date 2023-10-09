@@ -30,12 +30,7 @@ fn run() {
     //std::panic::set_hook(Box::new(console_error_panic_hook::hook));
     //console_log::init_with_level(Level::Debug).unwrap();
 
-    // Use `web_sys`'s global `window` function to get a handle on the global
-    // window object.
-
-    // the comment in the source code even says this is large
     let window = Global::get_window();
-    //let window = web_sys::window().unwrap();
     let document = window.document().unwrap();
     let body = document.body().unwrap();
 
